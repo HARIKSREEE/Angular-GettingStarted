@@ -10,14 +10,29 @@ import { Iproduct } from './product';
 
 })
 
-export class ProductListComponent implements OnInit{
+export class ProductListComponent implements OnInit {
 
     pageTitle: string = "Product List";
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage: boolean = false;
-    listFilter: string = 'cart';
+    //listFilter: string = 'cart';
 
+    _listFilter: string;
+
+    get listFilter(): string {
+
+        return this._listFilter;
+    }
+
+    set listFilter(value: string) {
+
+        this._listFilter = value;
+        this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+
+    }
+
+    filteredProducts: Iproduct[];
     // products: any[] = [
 
     //     {
@@ -45,7 +60,7 @@ export class ProductListComponent implements OnInit{
 
     //The below is the implementation of the Interface exprorted from 'product.ts' file.
 
-     products: Iproduct[] = [
+    products: Iproduct[] = [
 
         {
             "productId": 2,
@@ -70,6 +85,35 @@ export class ProductListComponent implements OnInit{
 
     ];
 
+    constructor() {
+
+        this.filteredProducts = this.products;
+        this.listFilter = 'cart';
+
+        var testValue = "my Test Value";
+
+        console.log('The index value is '+testValue.indexOf('x'));
+
+    }
+
+    performFilter(filterBy: string): Iproduct[] {
+
+        filterBy = filterBy.toLocaleLowerCase();
+
+        return this.products.filter((product: Iproduct) => product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    }
+
+    //****************** Javascript equivalent of the above implementation******************************
+    //
+    // ProductListComponent.prototype.performFilter = function (filterBy) {
+    //     filterBy = filterBy.toLocaleLowerCase();
+    //     return this.products.filter(
+        // function (product) { 
+        //     return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1; 
+        // });
+    // };
+
     toggleImage(): void {
 
         this.showImage = !this.showImage;
@@ -79,6 +123,8 @@ export class ProductListComponent implements OnInit{
 
         console.log('On OnInit');
     }
+
+   
 
 
 }
