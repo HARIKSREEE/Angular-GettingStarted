@@ -92,7 +92,7 @@ export class ProductListComponent implements OnInit {
 
         var testValue = "my Test Value";
 
-        console.log('The index value is '+testValue.indexOf('x'));
+        console.log('The index value is ' + testValue.indexOf('x'));
 
     }
 
@@ -109,9 +109,9 @@ export class ProductListComponent implements OnInit {
     // ProductListComponent.prototype.performFilter = function (filterBy) {
     //     filterBy = filterBy.toLocaleLowerCase();
     //     return this.products.filter(
-        // function (product) { 
-        //     return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1; 
-        // });
+    // function (product) { 
+    //     return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1; 
+    // });
     // };
 
     toggleImage(): void {
@@ -124,7 +124,10 @@ export class ProductListComponent implements OnInit {
         console.log('On OnInit');
     }
 
-   
+    onRatingClicked(message: string): void {
 
+        this.pageTitle = "Product List" + ' ' +message;
+
+    }
 
 }
