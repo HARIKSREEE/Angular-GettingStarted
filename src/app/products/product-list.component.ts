@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Iproduct } from './product';
+import { ProductService } from './product.service';
 
 @Component({
 
@@ -33,7 +34,8 @@ export class ProductListComponent implements OnInit {
     }
 
     filteredProducts: Iproduct[];
-    // products: any[] = [
+    products: any[];
+     //products: any[] = [
 
     //     {
     //         "productId": 2,
@@ -60,39 +62,38 @@ export class ProductListComponent implements OnInit {
 
     //The below is the implementation of the Interface exprorted from 'product.ts' file.
 
-    products: Iproduct[] = [
+    // products: Iproduct[] = [
 
-        {
-            "productId": 2,
-            "productName": "Garden Cart",
-            "productCode": "GDN-0023",
-            "releaseDate": "March 18, 2018",
-            "description": "15 gallon capacity rolling garden cart",
-            "price": 32.99,
-            "starRating": 4.2,
-            "imageUrl": "https://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
-        },
-        {
-            "productId": 5,
-            "productName": "Hammer",
-            "productCode": "TBX-0048",
-            "releaseDate": "May 21, 2016",
-            "description": "Curved claw steel hammer",
-            "price": 8.9,
-            "starRating": 4.8,
-            "imageUrl": "https://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
-        }
+    //     {
+    //         "productId": 2,
+    //         "productName": "Garden Cart",
+    //         "productCode": "GDN-0023",
+    //         "releaseDate": "March 18, 2018",
+    //         "description": "15 gallon capacity rolling garden cart",
+    //         "price": 32.99,
+    //         "starRating": 4.2,
+    //         "imageUrl": "https://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
+    //     },
+    //     {
+    //         "productId": 5,
+    //         "productName": "Hammer",
+    //         "productCode": "TBX-0048",
+    //         "releaseDate": "May 21, 2016",
+    //         "description": "Curved claw steel hammer",
+    //         "price": 8.9,
+    //         "starRating": 4.8,
+    //         "imageUrl": "https://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
+    //     }
 
-    ];
+    // ];
 
-    constructor() {
+    constructor(private ProductService: ProductService) {
 
-        this.filteredProducts = this.products;
-        this.listFilter = 'cart';
+        //this.listFilter = 'cart';
 
-        var testValue = "my Test Value";
+        // var testValue = "my Test Value";
 
-        console.log('The index value is ' + testValue.indexOf('x'));
+        // console.log('The index value is ' + testValue.indexOf('x'));
 
     }
 
@@ -122,6 +123,8 @@ export class ProductListComponent implements OnInit {
     ngOnInit(): void {
 
         console.log('On OnInit');
+        this.products = this.ProductService.getProducts();
+        this.filteredProducts = this.products;
     }
 
     onRatingClicked(message: string): void {
