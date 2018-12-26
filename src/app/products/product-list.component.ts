@@ -5,7 +5,7 @@ import { ProductService } from './product.service';
 
 @Component({
 
-    selector: "pm-products",
+    /*selector: "pm-products",*/ //removed this selector because we started using routing
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.css']
 
