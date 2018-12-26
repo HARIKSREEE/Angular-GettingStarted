@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit {
     //listFilter: string = 'cart';
 
     _listFilter: string;
+    errorMessage: any;
 
     get listFilter(): string {
 
@@ -34,8 +35,8 @@ export class ProductListComponent implements OnInit {
     }
 
     filteredProducts: Iproduct[];
-    products: any[];
-     //products: any[] = [
+    products;
+    //products: any[] = [
 
     //     {
     //         "productId": 2,
@@ -123,13 +124,19 @@ export class ProductListComponent implements OnInit {
     ngOnInit(): void {
 
         console.log('On OnInit');
-        this.products = this.ProductService.getProducts();
-        this.filteredProducts = this.products;
+        this.products = this.ProductService.getProducts().subscribe(
+            products => {
+            this.products = products;
+                this.filteredProducts = this.products;
+            },
+            error => this.errorMessage = <any>error
+        );
+
     }
 
     onRatingClicked(message: string): void {
 
-        this.pageTitle = "Product List" + ' ' +message;
+        this.pageTitle = "Product List" + ' ' + message;
 
     }
 
