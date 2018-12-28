@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-2">Filter by:</div>
             <div class="col-md-4">
-                <input type="text" [(ngModel)]='listFilter'/>
+                <input type="text" [(ngModel)]='listFilter' />
             </div>
         </div>
 
@@ -24,15 +24,13 @@
 
         <div class="table-responsive">
 
-            <table class="table"
-                   *ngIf="products && products.length">
+            <table class="table" *ngIf="products && products.length">
 
                 <thead>
 
                     <tr>
                         <th>
-                            <button class="btn btn-primary"
-                                    (click)='toggleImage()'>
+                            <button class="btn btn-primary" (click)='toggleImage()'>
 
                                 <!--Show Image-->
                                 {{showImage ? 'Hide':'Show'}} Image
@@ -49,14 +47,12 @@
                 <tbody>
                     <tr *ngFor="let product of filteredProducts">
                         <td>
-                            <img *ngIf="showImage"
-                                 [src]='product.imageUrl'
-                                 [title]='product.productName'
-                                 [style.width.px]='imageWidth'
-                                 [style.margin.px]='imageMargin'>
+                            <img *ngIf="showImage" [src]='product.imageUrl' [title]='product.productName'
+                                [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
 
                         </td>
-                        <td>{{product.productName}}</td>
+                        <td><a [routerLink]="['/products',product.productId]">
+                                {{product.productName}}</a></td>
 
                         <td>{{product.productCode | ConvertToSpaces:'-' | lowercase}}</td>
 
@@ -66,7 +62,9 @@
                             'symbol': '1.2-3' }}</td>
 
                         <!-- <td>{{product.starRating}}</td> -->
-                        <td><pm-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'></pm-star></td>
+                        <td>
+                            <pm-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'></pm-star>
+                        </td>
                     </tr>
                 </tbody>
             </table>
